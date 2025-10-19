@@ -39,6 +39,6 @@ while True:
     if x > mx: mx = x
 
 if mn == float("inf"):
-    print("Sem dados.")
+    print("No data.")
 else:
     print("min =", mn, " | max =", mx)
