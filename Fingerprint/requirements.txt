@@ -1,0 +1,7 @@
+#requirements for Fingerprint project that must be followed:
+opencv-python --pre
+scikit-image --pre
+numpy
+scipy
+scikit-learn
+cryptography
