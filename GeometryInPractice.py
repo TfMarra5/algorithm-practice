@@ -1,6 +1,5 @@
 import math
 
-
 #menu for terminal
 def menu():
   print("[1] Calculate the circumference of a circle")
@@ -13,43 +12,36 @@ def get_float(prompt, positive=False):
         try:
             val = float(input(prompt))
             if positive and val <= 0:
-                print("\n") 
-                print("Please enter a value greater than 0.")
-                print("\n") 
+                print("\nPlease enter a value greater than 0.\n")
                 continue
             return val
         except ValueError:
-            print("\n") 
-            print("Invalid number. Try again.")
-            print("\n") 
+            print("\nInvalid number. Try again.\n")
 
 while True:
     menu()
     choice_str = input("Enter your choice: ").strip()
 
     if not choice_str.isdigit():
-        print("\n") 
-        print("Invalid choice. Please enter 0, 1, 2, or 3.")
-        print("\n") 
+        print("\nInvalid choice. Please enter 0, 1, 2, or 3.\n")
         continue
 
     choice = int(choice_str)
+
 
     if choice ==1:
         #circumference of a circle computation
         radius = float(input("Enter the radius of the circle to calculate the circumference: "))
         C = 2*math.pi*radius
-        print("\n") 
-        print("the circumference is:", C)
-        print("\n") 
+        print("\nthe circumference is:", C, "\n")
+
     elif choice ==2:
         #area of a piece of land computation
         base = float(input("Enter the base in meters of the land to calculate the area: "))
         height = float(input("Enter the height in meters of the land to calculate the area: "))
         area = base * height
-        print("\n") 
-        print(f"The area of the land is: {area} meters squared")
-        print("\n") 
+        print(f"\nThe area of the land is: {area} meters squared\n")
+
     elif choice ==3:
         # calculating the RPM of a wheel
         velocity = float(input("Enter the velocity of the vehicle in meters per second: "))
@@ -57,15 +49,11 @@ while True:
         wheel_radius = wheel_diameter / 2
         circumference_wheel = 2 * math.pi * wheel_radius
         rpm = (velocity / circumference_wheel) * 60
-        print("\n") 
-        print("The RPM of the wheel is:", rpm)
-        print("\n") 
+        print("\nThe RPM of the wheel is:", rpm, "\n")
+
     elif choice ==0:
-        print("\n") 
-        print("Exiting the program.")
-        print("\n") 
+        print("\nExiting the program.\n")
         break
+
     else:
-        print("\n") 
-        print("Invalid choice. Please try again.")
-        print("\n") 
+        print("\nInvalid choice. Please try again.\n")
