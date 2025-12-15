@@ -1,8 +1,6 @@
 import java.util.*;
 
-// ----------------------------------------
 // Oven
-// ----------------------------------------
 class Oven {
     public double targetC = 0.0;
     public double sensor_offsetC = 0.0;
@@ -17,9 +15,7 @@ class Oven {
     }
 }
 
-// ----------------------------------------
 // Scale
-// ----------------------------------------
 class Scale {
 
     public double measure(String what) {
@@ -32,9 +28,8 @@ class Scale {
     }
 }
 
-// ----------------------------------------
 // Thermometer
-// ----------------------------------------
+
 class Thermometer {
 
     public double actual_oven_temp(double setpoint, double offset) {

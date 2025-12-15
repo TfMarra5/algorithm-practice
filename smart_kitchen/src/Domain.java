@@ -1,8 +1,6 @@
 import java.util.*;
 
-// ----------------------------------------
 // Ingredient
-// ----------------------------------------
 class Ingredient {
     public String name;
     public double quantity;
@@ -14,9 +12,7 @@ class Ingredient {
     }
 }
 
-// ----------------------------------------
-// Step
-// ----------------------------------------
+// step
 class Step {
     public String action;
     public double value;
@@ -24,9 +20,7 @@ class Step {
     public String note;
 }
 
-// ----------------------------------------
 // Recipe
-// ----------------------------------------
 class Recipe {
     public String name;
     public List<Ingredient> ingredients = new ArrayList<>();
@@ -62,9 +56,7 @@ class Recipe {
     }
 }
 
-// ----------------------------------------
-// Pantry
-// ----------------------------------------
+// pantry
 class Pantry {
     public Map<String, Double> stock = new HashMap<>();
 
@@ -79,9 +71,7 @@ class Pantry {
     }
 }
 
-// ----------------------------------------
-// Constraints
-// ----------------------------------------
+// constraints
 class Constraints {
     public boolean vegan = false;
     public boolean lactose_free = false;
