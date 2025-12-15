@@ -12,7 +12,7 @@ class Ingredient {
     }
 }
 
-// step
+// Step
 class Step {
     public String action;
     public double value;
@@ -56,7 +56,7 @@ class Recipe {
     }
 }
 
-// pantry
+// Pantry (simulated ingredient stock)
 class Pantry {
     public Map<String, Double> stock = new HashMap<>();
 
@@ -71,7 +71,7 @@ class Pantry {
     }
 }
 
-// constraints
+// Constraints (dietary and quantity requirements)
 class Constraints {
     public boolean vegan = false;
     public boolean lactose_free = false;

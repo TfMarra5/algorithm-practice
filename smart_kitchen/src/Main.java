@@ -4,7 +4,7 @@ public class Main {
         Recipe r = new Recipe();
         r.name = "Vanilla Sponge Cake";
         r.servings = 8;
-        r.pan_area_cm2 = 314.0;
+        r.pan_area_cm2 = 314.0; // Standard 20cm round pan
 
         Ingredient i1 = new Ingredient();
         i1.name = "wheat_flour";
@@ -40,6 +40,7 @@ public class Main {
         i6.name = "baking_powder";
         i6.quantity = 10;
         i6.kcal_per_unit = 0;
+        i6.unit = "g";
 
         Ingredient i7 = new Ingredient();
         i7.name = "salt";
@@ -56,23 +57,23 @@ public class Main {
         r.ingredients.add(i6);
         r.ingredients.add(i7);
 
-            Step s1 = new Step();
-            s1.action = "preheat";
-            s1.value = 180;
-            s1.unit = "C";
-            s1.note = "Preheat oven.";
+        Step s1 = new Step();
+        s1.action = "preheat";
+        s1.value = 180;
+        s1.unit = "C";
+        s1.note = "Preheat oven.";
 
-            Step s2 = new Step();
-            s2.action = "mix";
-            s2.value = 0;
-            s2.unit = "";
-            s2.note = "Mix dry ingredients, add wet.";
+        Step s2 = new Step();
+        s2.action = "mix";
+        s2.value = 0;
+        s2.unit = "";
+        s2.note = "Mix dry ingredients, add wet.";
 
-            Step s3 = new Step();
-            s3.action = "bake";
-            s3.value = 35;
-            s3.unit = "min";
-            s3.note = "Bake until toothpick clean.";
+        Step s3 = new Step();
+        s3.action = "bake";
+        s3.value = 35;
+        s3.unit = "min";
+        s3.note = "Bake until toothpick clean.";
 
 
         r.steps.add(s1);
@@ -87,58 +88,60 @@ public class Main {
         System.out.println();
         System.out.println("Adjusted Recipe: " + r.name);
         System.out.println("Servings: " + r.servings);
-        System.out.println("Pan area: " + r.pan_area_cm2 + " cm2");
+        System.out.println("Pan area: " + Util.round1(r.pan_area_cm2) + " cm2");
 
-
+        System.out.println("\nIngredients:");
         for (Ingredient ing : r.ingredients) {
             System.out.println(ing.name + ": " + ing.quantity + ing.unit +
-                    " (" + ing.kcal() + "kcal)");
+                               " (" + Util.round1(ing.kcal()) + "kcal)");
         }
 
         System.out.println("\nSteps:");
         for (Step st : r.steps) {
             String t = st.action;
-            if (!st.unit.isEmpty()) {
+            if (!st.unit.isEmpty() && st.value > 0) {
                 t += " " + st.value + st.unit;
             }
             System.out.println("* " + t + " - " + st.note);
         }
 
-        System.out.println("Total kcal: " + Nutrition.totalKcal(r));
-        System.out.println("per serving: " + Nutrition.kcalPerServ(r));
+        System.out.println("\nNutrition:");
+        System.out.println("Total kcal: " + Util.round1(Nutrition.totalKcal(r)));
+        System.out.println("Per serving: " + Util.round1(Nutrition.kcalPerServ(r)) + " kcal");
     }
 
 
     public static void main(String[] args) {
 
         Pantry p = new Pantry();
-        p.stock.put("wheat_flour", 150.0);
+        // Pantry stock simulation (g or ml)
+        p.stock.put("wheat_flour", 150.0); // Only half the required flour
         p.stock.put("gluten_free_mix", 0.0);
 
         p.stock.put("sugar", 200.0);
         p.stock.put("vegetable_oil", 150.0);
-        p.stock.put("butter", 0.0);
+        p.stock.put("butter", 0.0); // Missing butter, substitution needed
 
-        p.stock.put("oat_milk", 300.0);
-        p.stock.put("milk", 0.0);
-        p.stock.put("egg", 1.0);
+        p.stock.put("oat_milk", 300.0); // Has oat milk
+        p.stock.put("milk", 0.0); // Missing milk
+        p.stock.put("egg", 1.0); // Not enough eggs
+        p.stock.put("flaxseed_meal+water", 100.0); // Has flaxseed (vegan egg substitute)
 
-        p.stock.put("flaxseed_meal+water", 100.0);
         p.stock.put("baking_powder", 20.0);
         p.stock.put("salt", 10.0);
 
 
         Constraints c = new Constraints();
         c.vegan = false;
-        c.lactose_free = true;
+        c.lactose_free = true; // Swap milk/butter/etc.
         c.gluten_free = false;
-        c.max_kcal_per_serv = 280.0;
-        c.target_servings = 6;
-        c.target_pan_area_cm2 = 380.0;
+        c.max_kcal_per_serv = 280.0; // Target maximum calories
+        c.target_servings = 6; // Scale down servings (from 8)
+        c.target_pan_area_cm2 = 380.0; // Scale up pan size (from 314)
         c.avoid.add("peanut");
 
         Oven oven = new Oven();
-        oven.sensor_offsetC = 8.0;
+        oven.sensor_offsetC = 8.0; // Oven reads 8C higher than actual temp
 
         Assistant asst = new Assistant();
         Recipe base = default_cake();
@@ -147,33 +150,35 @@ public class Main {
 
         AssistantResult res = asst.plan(base, p, c, oven_offsetC);
 
+        System.out.println("--- Smart Recipe Assistant Simulation ---");
+        
+        // Print the adjusted recipe and notes/warnings
         print_recipe(res.adjusted);
 
         if (!res.notes.isEmpty()) {
-            System.out.println();
-            System.out.println("Notes:");
+            System.out.println("\n--- NOTES (Adjustments) ---");
             for (String n : res.notes) {
                 System.out.println("- " + n);
             }
         }
 
         if (!res.warnings.isEmpty()) {
-            System.out.println();
-            System.out.println("Warnings:");
+            System.out.println("\n--- WARNINGS (Issues) ---");
             for (String w : res.warnings) {
                 System.out.println("- " + w);
             }
         }
-
+        
+        System.out.println("\n--- IoT DEVICE ACTIONS ---");
+        // Execute steps adjusted by the Assistant
         for (Step st : res.adjusted.steps) {
             if (st.action.equals("preheat")) {
-                oven.preheat(st.value);
+                oven.preheat(st.value); // Uses the compensated temperature
             } else if (st.action.equals("bake")) {
                 System.out.println("[Oven] Baking for " + st.value + " minutes");
             }
         }
 
-
-        System.out.println("\nDone.");
+        System.out.println("\nDone. Enjoy your custom cake!");
     }
 }
