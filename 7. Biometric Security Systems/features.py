@@ -2,7 +2,6 @@
 import numpy as np
 import cv2
 
-
 def crossing_number(win):
     # 3x3 binary window
     p = win.reshape(-1)
