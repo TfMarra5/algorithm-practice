@@ -30,13 +30,13 @@ while True:
 
 
     if choice ==1:
-        #circumference of a circle computation
+        #circumference of a circle
         radius = float(input("Enter the radius of the circle to calculate the circumference: "))
         C = 2*math.pi*radius
         print("\nthe circumference is:", C, "\n")
 
     elif choice ==2:
-        #area of a piece of land computation
+        #area of a piece of land
         base = float(input("Enter the base in meters of the land to calculate the area: "))
         height = float(input("Enter the height in meters of the land to calculate the area: "))
         area = base * height
