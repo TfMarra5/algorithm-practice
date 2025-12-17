@@ -12,6 +12,7 @@ from match import candidate_pairs, align_rigid, score
 from security import cancelable_transform, encrypt_template, decrypt_template
 
 
+
 KEY = os.environ.get("FP_AES_KEY", None)
 
 if KEY is None:

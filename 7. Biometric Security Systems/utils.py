@@ -43,6 +43,7 @@ def blockwise_zscore(img, blk=16):
     out = cv2.normalize(out, None, 0, 255, cv2.NORM_MINMAX)
     out = out.astype(np.uint8)
 
+
     return out
 
 

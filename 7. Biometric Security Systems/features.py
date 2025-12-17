@@ -9,6 +9,7 @@ def crossing_number(win):
     # neighbors in a circle (go around and come back to the first)
     order = [1, 2, 5, 8, 7, 6, 3, 0, 1]
 
+
     changes = 0
     i = 0
     while i < 8:

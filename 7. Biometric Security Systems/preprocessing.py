@@ -77,6 +77,7 @@ def gabor_enhance(img, ang, blk=16):
     return out2
 
 
+
 def preprocess(gray):
     norm = blockwise_zscore(gray)
 

@@ -138,6 +138,7 @@ def score(minsA, minsB, T, pairs, inliers, r=10.0, tau=np.deg2rad(15)):
             ang_ok[i] = True
         i += 1
 
+
     ok = pos_ok & ang_ok & inliers
 
     matched = 0
